@@ -1,6 +1,10 @@
 import { Search, FilePlus, Grid3X3, Plus, Edit3 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Dashboard() {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col items-center p-4">
       {/* Logo */}
@@ -34,15 +38,16 @@ export default function Dashboard() {
 
       {/* Action Buttons */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6 w-full max-w-md">
-        <div className="flex flex-col items-center p-4 border rounded-lg hover:shadow-md cursor-pointer">
+        <div onClick={() => navigate("/add-document-new")}
+          className="flex flex-col items-center p-4 border rounded-lg hover:shadow-md cursor-pointer">
           <FilePlus size={28} className="text-blue-600" />
           <span className="mt-2 text-sm font-medium">Add File</span>
         </div>
-        <div className="flex flex-col items-center p-4 border rounded-lg hover:shadow-md cursor-pointer">
+        <div onClick={()=> navigate("/document-category")} className="flex flex-col items-center p-4 border rounded-lg hover:shadow-md cursor-pointer">
           <Grid3X3 size={28} className="text-blue-600" />
           <span className="mt-2 text-sm font-medium">Add Category</span>
         </div>
-        <div className="flex flex-col items-center p-4 border rounded-lg hover:shadow-md cursor-pointer">
+        <div onClick={()=> navigate("/wings")} className="flex flex-col items-center p-4 border rounded-lg hover:shadow-md cursor-pointer">
           <Plus size={28} className="text-blue-600" />
           <span className="mt-2 text-sm font-medium">Add Wings</span>
         </div>
