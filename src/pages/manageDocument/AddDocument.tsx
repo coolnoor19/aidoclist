@@ -1,164 +1,100 @@
 import React, { useState } from "react";
-import { SiGoogledrive, SiDropbox } from "react-icons/si";
 
-type FormData = {
-  category: string;
-  files: File[];
-};
-
-const AddDocumentForm: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    category: "Root",
-    files: [],
-  });
-
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFormData((prev) => ({ ...prev, category: e.target.value }));
-  };
+export default function AddDocumentForm() {
+  const [category, setCategory] = useState("");
+  const [files, setFiles] = useState<FileList | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  if (e.target.files) {
-    const newFiles = Array.from(e.target.files);
-    setFormData((prev) => ({
-      ...prev,
-      files: [...prev.files, ...newFiles].slice(0, 10), // Only keep up to 10 files
-    }));
-  }
-};
-
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    if (e.dataTransfer.files) {
-      setFormData((prev) => ({
-        ...prev,
-        files: [...prev.files, ...Array.from(e.dataTransfer.files)],
-      }));
-    }
+    setFiles(e.target.files);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted", formData);
+    if (!category || !files) {
+      alert("Please select a category and upload files");
+      return;
+    }
+    alert(`Uploaded ${files.length} file(s) to category: ${category}`);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-600 via-gray-800 to-black p-6">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-5xl bg-white shadow-lg rounded-xl p-6"
+        className="w-full max-w-4xl grid md:grid-cols-2 gap-8 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-xl p-8"
       >
-        <h1 className="text-xl md:text-2xl font-bold text-gray-800 mb-6">
-          Add Single/Bulk Document
-        </h1>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Left Side */}
-          <div className="space-y-5">
-            {/* Document Category */}
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">
-                Document Category <span className="text-red-500">*</span>
-              </label>
-              <div className="flex gap-3">
-                <select
-                  value={formData.category}
-                  onChange={handleCategoryChange}
-                  className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 flex-1"
-                >
-                  <option>Root</option>
-                  <option>Finance</option>
-                  <option>HR</option>
-                  <option>IT</option>
-                </select>
-                <button
-                  type="button"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow"
-                >
-                  Add Document Category
-                </button>
-              </div>
-            </div>
-
-            {/* Upload Section */}
-            <div className="space-y-3">
-              <label className="block text-sm font-medium text-gray-700">
-                Upload Single/Bulk Document{" "}
-                <span className="text-red-500">*</span>
-              </label>
-              <div
-                onDrop={handleDrop}
-                onDragOver={(e) => e.preventDefault()}
-                className="border-2 border-dashed border-blue-400 rounded-lg p-6 text-center cursor-pointer hover:bg-blue-50 transition"
-              >
-                <input
-                  type="file"
-                  multiple
-                  onChange={handleFileChange}
-                  className="hidden"
-                  id="file-upload"
-                  accept=".png,.jpg,.jpeg,.pdf,.pptx,.docx"
-                />
-                <label htmlFor="file-upload" className="cursor-pointer">
-                  <p className="text-gray-600">
-                    Drop files here or{" "}
-                    <span className="text-blue-600 underline">click</span> to
-                    upload
-                  </p>
-                </label>
-              </div>
-
-              {/* Info text */}
-              <p className="text-xs text-red-500">
-                Up to 10 files can be uploaded. For more than 10 files, please
-                use bulk upload.
-              </p>
-              <p className="text-xs text-red-500">
-                Max file size: 10MB. Allowed extensions: PNG, JPG, JPEG, PDF,
-                PPTX, DOCX. No Excel files allowed.
-              </p>
-            </div>
+        {/* Left Column */}
+        <div className="flex flex-col gap-6">
+          <div>
+            <label className="block text-white text-sm font-medium mb-2">
+              Select Category
+            </label>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="w-full rounded-lg bg-white/20 border border-white/30 text-white px-4 py-3 focus:ring-2 focus:ring-teal-400 outline-none"
+            >
+              <option value="">Choose category</option>
+              <option value="finance">Finance</option>
+              <option value="legal">Legal</option>
+              <option value="hr">HR</option>
+            </select>
           </div>
 
-          {/* Right Side */}
-          <div className="flex flex-col items-center justify-center border-l border-gray-200">
-            <p className="text-sm font-medium text-gray-700 mb-4">
-              Upload files from drives
-            </p>
-            <div className="flex gap-4">
-              <button
-                type="button"
-                className="p-3 bg-red-500 text-white rounded-full shadow hover:bg-red-600"
+          <div>
+            <label className="block text-white text-sm font-medium mb-2">
+              Upload Files
+            </label>
+            <div className="border-2 border-dashed border-white/30 rounded-xl p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:border-teal-400 transition">
+              <input
+                type="file"
+                multiple
+                onChange={handleFileChange}
+                className="hidden"
+                id="fileUpload"
+              />
+              <label
+                htmlFor="fileUpload"
+                className="text-white/80 cursor-pointer"
               >
-                <SiGoogledrive size={24} />
-              </button>
-              <button
-                type="button"
-                className="p-3 bg-blue-500 text-white rounded-full shadow hover:bg-blue-600"
-              >
-                <SiDropbox size={24} />
-              </button>
+                Drag & Drop or <span className="text-teal-300">Browse</span>
+              </label>
+              {files && (
+                <p className="mt-3 text-sm text-teal-200">
+                  {files.length} file(s) selected
+                </p>
+              )}
             </div>
           </div>
         </div>
 
-        {/* Action buttons */}
-        <div className="flex justify-end gap-3 mt-6">
+        {/* Right Column */}
+        <div className="flex flex-col gap-6">
+          <h2 className="text-white text-lg font-semibold">
+            Quick Cloud Upload
+          </h2>
           <button
-            type="reset"
-            className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100"
+            type="button"
+            className="w-full flex items-center justify-center gap-3 bg-white/20 border border-white/30 text-white rounded-lg px-4 py-3 hover:bg-teal-500/60 transition"
           >
-            Cancel
+            <span>📂</span> Upload from Google Drive
           </button>
           <button
-            type="submit"
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700"
+            type="button"
+            className="w-full flex items-center justify-center gap-3 bg-white/20 border border-white/30 text-white rounded-lg px-4 py-3 hover:bg-teal-500/60 transition"
           >
-            Upload
+            <span>☁️</span> Upload from Dropbox
+          </button>
+
+          <button
+            type="submit"
+            className="mt-auto w-full bg-teal-500 text-white font-semibold py-3 rounded-lg hover:bg-teal-600 shadow-lg transition"
+          >
+            Upload Documents
           </button>
         </div>
       </form>
     </div>
   );
-};
+}
 
-export default AddDocumentForm;
