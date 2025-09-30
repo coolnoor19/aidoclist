@@ -182,7 +182,7 @@ const DocumentCategoryPage: React.FC = () => {
     if (!newCategory.trim()) return;
     const newCat = {
       id: categories.length + 1,
-      name: newCategory,
+      name: newCategory.trim(),
       wings: "-",
       roleType: "-",
     };
@@ -192,110 +192,108 @@ const DocumentCategoryPage: React.FC = () => {
   };
 
   return (
-    <div className="p-6 bg-gradient-to-br from-teal-600 via-gray-800 to-black min-h-screen ">
-      {/* Top bar with button */}
-      <div className="flex justify-between items-center mb-4 ">
-        <h2 className="text-xl font-semibold text-white">📂 Categories</h2>
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="px-4 py-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-lg shadow-md hover:opacity-90 transition"
-        >
-          + Add Category
-        </button>
-      </div>
+    /**
+     * Full-viewport wrapper with a FIXED gradient background behind everything.
+     * This guarantees no body/background "edge" shows on any side.
+     */
+    <div className="relative min-h-screen w-full overflow-x-hidden">
+      {/* Gradient background layer */}
+      <div className="fixed inset-0 -z-10 bg-gradient-to-br from-teal-600 via-gray-800 to-black" />
 
-      {/* Table */}
-      <div className="overflow-hidden bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-md">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-gray-200">
-            <thead>
-              <tr className="bg-gradient-to-r from-teal-500 to-teal-600 text-white">
-                <th className="px-5 py-4">#</th>
-                <th className="px-5 py-4">Category</th>
-                <th className="px-5 py-4">Wings</th>
-                <th className="px-5 py-4">Role Type</th>
-                <th className="px-5 py-4 text-center">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {categories.map((cat, index) => (
-                <tr
-                  key={cat.id}
-                  className={`${index % 2 === 0 ? "bg-white/5" : "bg-white/0"
-                    } hover:bg-white/20 transition`}
-                >
-                  <td className="px-5 py-4">{cat.id}</td>
-                  <td className="px-5 py-4">{cat.name}</td>
-                  <td className="px-5 py-4">{cat.wings}</td>
-                  <td className="px-5 py-4">{cat.roleType}</td>
-                  <td className="px-5 py-4 text-center">
-                    <div className="flex gap-3 justify-center">
-                      <button className="text-blue-400 hover:underline">
-                        ✏ Edit
-                      </button>
-                      <button className="text-teal-400 hover:underline">
-                        ⚙ Manage
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-              {categories.length === 0 && (
-                <tr>
-                  <td
-                    colSpan={5}
-                    className="text-center py-6 text-gray-400 text-lg"
-                  >
-                    🚫 No categories found
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+      {/* If you have a fixed navbar, give the page some top padding (e.g. pt-8/pt-24) */}
+      <main className="mx-auto w-full max-w-6xl px-4 sm:px-6 py-8 sm:py-10">
+        {/* Top bar with button */}
+        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="text-xl font-semibold text-white">📂 Categories</h2>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="px-4 py-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-lg shadow-md hover:opacity-90 transition"
+          >
+            + Add Category
+          </button>
         </div>
-      </div>
 
-      {/* Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-50">
-          <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-2xl shadow-lg w-full max-w-lg mx-4">
-            <h3 className="text-2xl font-semibold mb-4 text-white">
-              ➕ Add a New Category
-            </h3>
-
-            <input
-              type="text"
-              placeholder="Enter category name..."
-              value={newCategory}
-              onChange={(e) => setNewCategory(e.target.value)}
-              className="w-full p-3 mb-4 rounded-lg border border-white/20 bg-transparent text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
-            />
-
-            <div className="flex justify-end gap-4">
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 rounded-lg bg-gray-600 text-white hover:bg-gray-500"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleAddCategory}
-                className="px-4 py-2 rounded-lg bg-gradient-to-r from-teal-500 to-teal-600 text-white hover:opacity-90"
-              >
-                Add
-              </button>
-            </div>
-
-            <p className="mt-4 text-sm text-gray-400">
-              💡 Tip: Select multiple categories to add <b>wings</b> and{" "}
-              <b>roles</b> in bulk.
-            </p>
+        {/* Table */}
+        <div className="overflow-hidden bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-md">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-gray-200">
+              <thead>
+                <tr className="bg-gradient-to-r from-teal-500 to-teal-600 text-white">
+                  <th className="px-5 py-4">#</th>
+                  <th className="px-5 py-4">Category</th>
+                  <th className="px-5 py-4">Wings</th>
+                  <th className="px-5 py-4">Role Type</th>
+                  <th className="px-5 py-4 text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {categories.map((cat) => (
+                  <tr
+                    key={cat.id}
+                    className={`${cat.id % 2 === 0 ? "bg-white/5" : "bg-white/0"} hover:bg-white/20 transition`}
+                  >
+                    <td className="px-5 py-4">{cat.id}</td>
+                    <td className="px-5 py-4">{cat.name}</td>
+                    <td className="px-5 py-4">{cat.wings}</td>
+                    <td className="px-5 py-4">{cat.roleType}</td>
+                    <td className="px-5 py-4 text-center">
+                      <div className="flex gap-3 justify-center">
+                        <button className="text-blue-400 hover:underline">✏ Edit</button>
+                        <button className="text-teal-400 hover:underline">⚙ Manage</button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+                {categories.length === 0 && (
+                  <tr>
+                    <td colSpan={5} className="text-center py-6 text-gray-300 text-lg">
+                      🚫 No categories found
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
-      )}
+
+        {/* Modal */}
+        {isModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+            <div className="w-full max-w-lg mx-4 rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 p-6 shadow-lg">
+              <h3 className="text-2xl font-semibold mb-4 text-white">➕ Add a New Category</h3>
+
+              <input
+                type="text"
+                placeholder="Enter category name..."
+                value={newCategory}
+                onChange={(e) => setNewCategory(e.target.value)}
+                className="w-full p-3 mb-4 rounded-lg border border-white/20 bg-transparent text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              />
+
+              <div className="flex justify-end gap-4">
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="px-4 py-2 rounded-lg bg-gray-600 text-white hover:bg-gray-500"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleAddCategory}
+                  className="px-4 py-2 rounded-lg bg-gradient-to-r from-teal-500 to-teal-600 text-white hover:opacity-90"
+                >
+                  Add
+                </button>
+              </div>
+
+              <p className="mt-4 text-sm text-gray-400">
+                💡 Tip: Select multiple categories to add <b>wings</b> and <b>roles</b> in bulk.
+              </p>
+            </div>
+          </div>
+        )}
+      </main>
     </div>
   );
 };
 
 export default DocumentCategoryPage;
-

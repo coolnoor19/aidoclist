@@ -1,1 +1,32 @@
 @import "tailwindcss";
+
+.glass-card {
+  @apply bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 transition hover:shadow-[0_0_20px_#14b8a6];
+}
+
+/* Primary button */
+.btn-primary {
+  @apply px-4 py-2 rounded-xl bg-teal-500 hover:bg-teal-600 text-white font-medium shadow-md;
+}
+
+/* Dark UI friendly native <select> */
+.select-dark {
+  color: #fff;                          /* closed select text stays white */
+  background-color: rgba(255,255,255,.08);
+}
+
+/* Dropdown menu items */
+.select-dark option {
+  color: #111827;                       /* black/near-black text in list */
+  background: #fff;                     /* white background rows */
+}
+
+/* Selected/hovered row highlight (Chrome/Edge) */
+.select-dark option:checked {
+  background: #e5e7eb;                  /* gray highlight */
+  color: #111827;
+}
+
+:root { --nav-height: 64px; }
+.safe-top { padding-top: calc(var(--nav-height) + 16px); } /* 16px extra breathing room */
+
