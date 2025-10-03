@@ -221,7 +221,7 @@ const AddUserForm: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-600 via-gray-800 to-black p-4">
+    <div className="min-h-screen flex items-center justify-center  p-4">
       <div className="w-full max-w-6xl bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-xl p-6 md:p-8">
         <h2 className="text-2xl font-semibold mb-4 text-white">Add New User</h2>
 

@@ -18,7 +18,7 @@ export default function AddDocumentForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-600 via-gray-800 to-black p-6">
+    <div className="min-h-screen flex items-center justify-center p-6">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-4xl grid md:grid-cols-2 gap-8 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-xl p-8"

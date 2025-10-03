@@ -407,9 +407,9 @@ const AssignWorkFlow: React.FC = () => {
     "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=200&auto=format&fit=crop";
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-600 via-gray-800 to-black p-4 md:p-6">
+    <div className="min-h-screen  p-4 md:p-6">
       {/* Card */}
-      <div className="mx-auto max-w-[1400px] bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-xl text-white">
+      <div className="mx-auto max-w-[1400px] bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-xl text-white mt-2">
         {/* Header */}
         <div className="px-4 md:px-6 pt-5">
           <h2 className="text-lg md:text-xl font-semibold">Attachment Flow List</h2>
