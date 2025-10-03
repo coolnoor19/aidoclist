@@ -279,14 +279,14 @@
 
 // src/pages/documentFlow/AttachmentFlowlist.tsx
 import React, { useState } from "react";
-import { Plus, PlusCircle, MinusCircle, ChevronLeft, ChevronRight } from "lucide-react";
+import { PlusCircle, MinusCircle, ChevronLeft, ChevronRight } from "lucide-react";
 
-type TableRow = {
-  id: number;
-  category: string;
-  initRoles: string;
-  approval: string;
-};
+// type TableRow = {
+//   id: number;
+//   category: string;
+//   initRoles: string;
+//   approval: string;
+// };
 
 type RouteRow = {
   id: number;
@@ -295,20 +295,20 @@ type RouteRow = {
   isDownload: "Yes" | "No";
 };
 
-const btnPrimary =
-  "inline-flex items-center gap-2 rounded-md bg-blue-600 text-white px-3 py-2 text-sm font-semibold shadow-sm hover:bg-blue-700 cursor-pointer";
+// const btnPrimary =
+//   "inline-flex items-center gap-2 rounded-md bg-blue-600 text-white px-3 py-2 text-sm font-semibold shadow-sm hover:bg-blue-700 cursor-pointer";
 const inputBase =
   "w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400";
 
 const AttachmentFlowlist: React.FC = () => {
   // table chrome (empty like screenshot)
   const [perPage, setPerPage] = useState(10);
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const [q, setQ] = useState("");
-  const rows: TableRow[] = [];
-  const total = rows.length;
-  const maxPage = Math.max(1, Math.ceil(total / perPage));
-  const goto = (p: number) => setPage(Math.min(Math.max(1, p), maxPage));
+  // const rows: TableRow[] = [];
+  // const total = rows.length;
+  // const maxPage = Math.max(1, Math.ceil(total / perPage));
+  // const goto = (p: number) => setPage(Math.min(Math.max(1, p), maxPage));
 
   // dynamic rows for Forward To / Is Edit? / Is Download?
   const [routeRows, setRouteRows] = useState<RouteRow[]>([
@@ -494,7 +494,7 @@ const AttachmentFlowlist: React.FC = () => {
                     value={perPage}
                     onChange={(e) => {
                       setPerPage(parseInt(e.target.value, 10));
-                      setPage(1);
+                      // setPage(1);
                     }}
                   >
                     {[10, 25, 50, 100].map((n) => (
@@ -578,6 +578,3 @@ const AttachmentFlowlist: React.FC = () => {
 };
 
 export default AttachmentFlowlist;
- 
-
-

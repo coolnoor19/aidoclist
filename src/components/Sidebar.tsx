@@ -1,4 +1,4 @@
-import { ChevronRight, X, Menu } from "lucide-react";
+import { ChevronRight, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 

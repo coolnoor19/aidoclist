@@ -3,10 +3,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
-  const navigate = useNavigate();
+
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-
+  const navigate = useNavigate();
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-blue-900 via-gray-900 to-black text-white overflow-hidden">
       {/* SIDEBAR */}
@@ -137,81 +137,3 @@ export default function Dashboard() {
 
 
 
- {/* ACTION CARDS */}
-          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div
-              onClick={() => navigate("/add-document-new")}
-              className="bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 rounded-2xl p-6 shadow-lg cursor-pointer transform hover:scale-105 transition"
-            >
-              <h2 className="text-xl font-semibold mb-3">📂 Upload File</h2>
-              <button className="bg-white text-blue-700 px-4 py-2 rounded-lg shadow hover:bg-gray-100">
-                Upload
-              </button>
-            </div>
-
-            <div
-              onClick={() => navigate("/document-category")}
-              className="bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 rounded-2xl p-6 shadow-lg cursor-pointer transform hover:scale-105 transition"
-            >
-              <h2 className="text-xl font-semibold mb-3">🗂 Add Category</h2>
-              <button className="bg-white text-indigo-700 px-4 py-2 rounded-lg shadow hover:bg-gray-100">
-                Add Category
-              </button>
-            </div>
-
-            <div
-              onClick={() => navigate("/wings")}
-              className="bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 rounded-2xl p-6 shadow-lg cursor-pointer transform hover:scale-105 transition"
-            >
-              <h2 className="text-xl font-semibold mb-3">🪽 Manage Wings</h2>
-              <button className="bg-white text-cyan-700 px-4 py-2 rounded-lg shadow hover:bg-gray-100">
-                Add Wing
-              </button>
-            </div>
-
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 shadow-lg">
-              <h2 className="text-xl font-semibold mb-4">📊 Summary</h2>
-              <div className="grid grid-cols-3 gap-4 text-center">
-                <div>
-                  <p className="text-3xl font-bold text-blue-400">25</p>
-                  <p className="text-sm text-gray-300">Files</p>
-                </div>
-                <div>
-                  <p className="text-3xl font-bold text-blue-400">10</p>
-                  <p className="text-sm text-gray-300">Categories</p>
-                </div>
-                <div>
-                  <p className="text-3xl font-bold text-blue-400">5</p>
-                  <p className="text-sm text-gray-300">Wings</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT COLUMN */}
-          <div className="space-y-6">
-            {/* Cloud Integrations */}
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 shadow-lg">
-              <h2 className="text-xl font-semibold mb-4">☁ Cloud Integrations</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {["Google Drive", "Dropbox", "OneDrive"].map((cloud) => (
-                  <div
-                    key={cloud}
-                    className="bg-gray-700 p-4 rounded-xl text-center hover:bg-gray-600 transition"
-                  >
-                    {cloud}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Recent Activity */}
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 shadow-lg">
-              <h2 className="text-xl font-semibold mb-4">🕒 Recent Activity</h2>
-              <ul className="space-y-2 text-gray-300">
-                <li>📄 Uploaded "Report.pdf"</li>
-                <li>🗂 Added new Category "Finance"</li>
-                <li>☁ Integrated Google Drive</li>
-              </ul>
-            </div>
-          </div>
