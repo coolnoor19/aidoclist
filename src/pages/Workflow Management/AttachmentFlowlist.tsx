@@ -436,7 +436,7 @@ const AttachmentFlowlist: React.FC = () => {
                       <button
                         type="button"
                         onClick={addRouteRow}
-                        className="absolute right-0 top-0 h-9 w-9 grid place-items-center rounded-full bg-green-500 text-white shadow hover:bg-green-600"
+                        className="absolute right-0 top-7 h-9 w-9 grid place-items-center rounded-full bg-green-500 text-white shadow hover:bg-green-600"
                         title="Add"
                         aria-label="Add row"
                       >
@@ -446,7 +446,7 @@ const AttachmentFlowlist: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => removeRouteRow(row.id)}
-                        className="absolute right-0 top-0 h-9 w-9 grid place-items-center rounded-full bg-red-500 text-white shadow hover:bg-red-600"
+                        className="absolute right-0 top-7 h-9 w-9 grid place-items-center rounded-full bg-red-500 text-white shadow hover:bg-red-600"
                         title="Remove"
                         aria-label="Remove row"
                       >
